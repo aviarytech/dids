@@ -1,0 +1,28 @@
+{
+  "name": "@aviarytech/did-core",
+  "version": "0.0.0",
+  "description": "Decentralized Identifiers (DIDs) core methods and interfaces",
+  "author": "Brian Richter <brian@aviary.tech>",
+  "homepage": "https://github.com/aviarytech/dids#readme",
+  "license": "BSD-3-Clause",
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aviarytech/dids.git"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json"
+  },
+  "bugs": {
+    "url": "https://github.com/aviarytech/dids/issues"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "clean:lock": "npx lerna exec 'rm -rf package-lock.json node_modules'",
+    "install:clean": "npx lerna clean -y && rm -rf node_modules && npm i",
+    "install:ci": "npm install --ignore-scripts && lerna link && lerna bootstrap --since origin/main --include-dependencies",
+    "bootstrap": "lerna bootstrap",
+    "lint": "lerna run lint --stream",
+    "test": "lerna run test --stream",
+    "postinstall": "npm run bootstrap",
+    "publish:stable:major": "lerna publish major",
+    "publish:stable:minor": "lerna publish minor",
+    "publish:stable:patch": "lerna publish patch",
+    "publish:unstable": "lerna publish prerelease --preid unstable --yes",
+    "release": "lerna publish",
+    "release:canary": "lerna publish --canary",
+    "build:website": "lerna run build:website --stream"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "npm run lint"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "husky": "^7.0.1",
+    "lerna": "^4.0.0"
+  }
+}
