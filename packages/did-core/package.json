@@ -7,6 +7,9 @@
   "license": "BSD-3-Clause",
   "main": "dist/index",
   "types": "dist/index",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist"
   ],
@@ -24,5 +27,6 @@
   },
   "devDependencies": {
     "typescript": "^4.3.5"
-  }
+  },
+  "gitHead": "c7ad32c24244da37e5da3c8a2f9d97e38e691757"
 }
