@@ -1,7 +1,7 @@
 /**
  * Interface defining a verification method definition entry in a DID Document.
  */
- export interface IDIDDocumentVerificationMethod {
+export interface IDIDDocumentVerificationMethod {
   /** Fully qualified identifier of this public key, e.g. did:example:entity.id#keys-1 */
   id: string;
   /** The type of this public key, as defined in: https://w3c-ccg.github.io/ld-cryptosuite-registry/ */
@@ -11,7 +11,7 @@
   /** The value of the public key in PEM format. Only one value field will be present. */
   publicKeyPem?: string;
   /** The value of the public key in JWK format. Only one value field will be present. */
-  publicKeyJwk?: { kty: string; crv: string; x: string };
+  publicKeyJwk?: JsonWebKey;
   /** The value of the public key in hex format. Only one value field will be present. */
   publicKeyHex?: string;
   /** The value of the public key in Base64 format. Only one value field will be present. */
@@ -22,11 +22,10 @@
   publicKeyMultibase?: string;
 }
 
-
 /**
  * Defines a service descriptor entry present in a DID Document.
  */
- export interface IDIDDocumentServiceDescriptor {
+export interface IDIDDocumentServiceDescriptor {
   /** The fully-qualified ID of this service, e.g. `did:example:me.id;agent`. */
   id: string;
   /** The type of this service. */
@@ -40,7 +39,7 @@
 /**
  * Interface describing the expected shape of a Decentralized Identity Document.
  */
- export interface IDIDDocument {
+export interface IDIDDocument {
   /** The standard context for DID Documents. */
   "@context": string[];
   /** The DID to which this DID Document pertains. */
