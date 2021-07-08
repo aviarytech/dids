@@ -1,3 +1,3 @@
 # `did-core`
 
-Decentralized Identifiers (DIDs) core methods and interfaces.
+Core methods and interfaces for Decentralized Identifiers (DIDs) v1.0
