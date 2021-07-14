@@ -1,6 +1,6 @@
 {
   "name": "did-web",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "The did:web method implementation",
   "keywords": [
     "did:web",
