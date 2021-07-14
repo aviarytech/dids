@@ -1,15 +1,19 @@
 {
-  "name": "@aviarytech/did-core",
+  "name": "did-web",
   "version": "0.0.5",
-  "description": "Decentralized Identifiers (DIDs) core methods and interfaces",
-  "author": "Brian Richter <brian@aviary.tech>",
+  "description": "The did:web method implementation",
+  "keywords": [
+    "did:web",
+    "did"
+  ],
+  "author": "Brian Richter <brianorwhatever@gmail.com>",
   "homepage": "https://github.com/aviarytech/dids#readme",
   "license": "BSD-3-Clause",
-  "main": "dist/index",
-  "types": "dist/index",
   "publishConfig": {
     "access": "public"
   },
+  "main": "dist/index",
+  "types": "dist/index",
   "files": [
     "dist"
   ],
@@ -24,12 +28,5 @@
   },
   "bugs": {
     "url": "https://github.com/aviarytech/dids/issues"
-  },
-  "devDependencies": {
-    "typescript": "^4.3.5"
-  },
-  "gitHead": "c7ad32c24244da37e5da3c8a2f9d97e38e691757",
-  "dependencies": {
-    "@transmute/json-web-signature": "^0.7.0-unstable.3"
   }
 }
