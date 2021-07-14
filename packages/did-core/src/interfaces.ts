@@ -1,3 +1,5 @@
+import { JsonWebKey } from "@transmute/json-web-signature";
+
 /**
  * Interface defining a verification method definition entry in a DID Document.
  */

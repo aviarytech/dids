@@ -28,5 +28,8 @@
   "devDependencies": {
     "typescript": "^4.3.5"
   },
-  "gitHead": "c7ad32c24244da37e5da3c8a2f9d97e38e691757"
+  "gitHead": "c7ad32c24244da37e5da3c8a2f9d97e38e691757",
+  "dependencies": {
+    "@transmute/json-web-signature": "^0.7.0-unstable.3"
+  }
 }
