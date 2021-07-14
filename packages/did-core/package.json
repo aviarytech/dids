@@ -1,6 +1,6 @@
 {
   "name": "@aviarytech/did-core",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Decentralized Identifiers (DIDs) core methods and interfaces",
   "author": "Brian Richter <brian@aviary.tech>",
   "homepage": "https://github.com/aviarytech/dids#readme",
@@ -28,7 +28,7 @@
   "devDependencies": {
     "typescript": "^4.3.5"
   },
-  "gitHead": "c7ad32c24244da37e5da3c8a2f9d97e38e691757",
+  "gitHead": "578cd153d0a5698d6e8379af7f9d572efe76b513",
   "dependencies": {
     "@transmute/json-web-signature": "^0.7.0-unstable.3"
   }

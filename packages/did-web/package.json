@@ -1,6 +1,6 @@
 {
   "name": "did-web",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "The did:web method implementation",
   "keywords": [
     "did:web",
@@ -28,5 +28,6 @@
   },
   "bugs": {
     "url": "https://github.com/aviarytech/dids/issues"
-  }
+  },
+  "gitHead": "578cd153d0a5698d6e8379af7f9d572efe76b513"
 }
