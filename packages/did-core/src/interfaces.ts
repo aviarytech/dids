@@ -1,5 +1,3 @@
-import { JsonWebKey } from "@transmute/json-web-signature";
-
 /**
  * Interface defining a verification method definition entry in a DID Document.
  */
@@ -13,7 +11,7 @@ export interface IDIDDocumentVerificationMethod {
   /** The value of the public key in PEM format. Only one value field will be present. */
   publicKeyPem?: string;
   /** The value of the public key in JWK format. Only one value field will be present. */
-  publicKeyJwk?: JsonWebKey;
+  publicKeyJwk?: any;
   /** The value of the public key in hex format. Only one value field will be present. */
   publicKeyHex?: string;
   /** The value of the public key in Base64 format. Only one value field will be present. */
