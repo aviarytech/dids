@@ -105,7 +105,7 @@ export class DIDDocument implements IDIDDocument {
     return this.service.find((s) => s.type === type);
   }
 
-  getKeyAgreementKeyById(id: string): IDIDDocumentVerificationMethod {
+  getKeyAgreementById(id: string): IDIDDocumentVerificationMethod {
     return this.keyAgreement.find((k) => k.id === id);
   }
 

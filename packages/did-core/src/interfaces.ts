@@ -88,6 +88,17 @@ interface IDIDDocument {
 
   /** Array of capability delegation methods */
   capabilityDelegation?: IDIDDocumentVerificationMethod[];
+
+  normalizeVerificationMethod: (
+    methods: (string | IDIDDocumentVerificationMethod)[]
+  ) => IDIDDocumentVerificationMethod[];
+  getVerificationMethodById: (id: string) => IDIDDocumentVerificationMethod;
+  getServiceById: (id: string) => IDIDDocumentServiceDescriptor;
+  getKeyAgreementById: (id: string) => IDIDDocumentVerificationMethod;
+  getAuthenticationById: (id: string) => IDIDDocumentVerificationMethod;
+  getCapabilityInvocationById: (id: string) => IDIDDocumentVerificationMethod;
+  getCapabilityDelegationById: (id: string) => IDIDDocumentVerificationMethod;
+  getAssertionMethodById: (id: string) => IDIDDocumentVerificationMethod;
 }
 
 interface IDIDResolver {
