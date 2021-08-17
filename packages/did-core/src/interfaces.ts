@@ -96,6 +96,7 @@ interface IDIDDocument {
   getServiceById: (id: string) => IDIDDocumentServiceDescriptor;
   getServiceByType: (type: string) => IDIDDocumentServiceDescriptor;
   getKeyAgreementById: (id: string) => IDIDDocumentVerificationMethod;
+  getAllKeyAgreements: () => IDIDDocumentVerificationMethod[];
   getAuthenticationById: (id: string) => IDIDDocumentVerificationMethod;
   getCapabilityInvocationById: (id: string) => IDIDDocumentVerificationMethod;
   getCapabilityDelegationById: (id: string) => IDIDDocumentVerificationMethod;
