@@ -1,0 +1,3 @@
+# `did-secrets`
+
+Secret resolver

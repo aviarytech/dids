@@ -1,0 +1,41 @@
+{
+  "name": "@aviarytech/did-secrets",
+  "version": "0.1.2",
+  "description": "Decentralized Identifiers (DIDs) secret resolver",
+  "author": "Brian Richter <brian@aviary.tech>",
+  "homepage": "https://github.com/aviarytech/dids#readme",
+  "license": "BSD-3-Clause",
+  "main": "dist/index",
+  "types": "dist/index",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aviarytech/dids.git"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "test": "tsdx test"
+  },
+  "bugs": {
+    "url": "https://github.com/aviarytech/dids/issues"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.3.2",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.4",
+    "typescript": "^4.3.5"
+  },
+  "gitHead": "09ed949dc9da46b09df381a90691df569ddf35d5",
+  "dependencies": {
+    "@aviarytech/crypto-core": "^0.0.5",
+    "@transmute/jsonld-document-loader": "^0.2.0"
+  }
+}
