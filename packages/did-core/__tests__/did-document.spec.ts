@@ -16,3 +16,22 @@ test("did document can initialize from json", async () => {
   expect(didDoc.service[0].type).toBe("DIDCommMessaging");
   expect(didDoc.service[0].id).toBe("did:web:example.com#didcomm");
 });
+
+test("did document can get all key agreement keys", async () => {
+  const json = require("../__fixtures__/didDocument.json");
+  const didDoc = new DIDDocument(json);
+
+  const kaks = didDoc.getAllKeyAgreements();
+
+  expect(kaks.length).toBe(1);
+  expect(kaks[0]).toMatchObject({
+    id: "did:web:example.com#key-2",
+    controller: "did:web:example.com",
+    type: "JsonWebKey2020",
+    publicKeyJwk: {
+      kty: "OKP",
+      crv: "X25519",
+      x: "fQwRvPeImgps_58yMWoaYeoEIYZW_XDgpmKMQHn7ozQ",
+    },
+  });
+});

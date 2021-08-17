@@ -109,6 +109,10 @@ export class DIDDocument implements IDIDDocument {
     return this.keyAgreement.find((k) => k.id === id);
   }
 
+  getAllKeyAgreements(): IDIDDocumentVerificationMethod[] {
+    return this.keyAgreement;
+  }
+
   getAuthenticationById(id: string): IDIDDocumentVerificationMethod {
     return this.authentication.find((k) => k.id === id);
   }

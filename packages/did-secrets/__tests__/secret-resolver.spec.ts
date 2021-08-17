@@ -1,4 +1,3 @@
-import axios from "axios";
 import { JSONSecretResolver } from "../src";
 
 test("secret resolver can resolve a JSON file", async () => {
