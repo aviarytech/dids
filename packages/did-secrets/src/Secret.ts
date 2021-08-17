@@ -1,6 +1,6 @@
 import {
   JWK,
-  X25519KeyAgreementKey,
+  X25519KeyAgreementKey2019,
   JsonWebKey2020,
 } from "@aviarytech/crypto-core";
 import { ISecret } from "./interfaces";
@@ -35,7 +35,7 @@ export class Secret implements ISecret {
   privateKeyMultibase?: string;
   publicKeyMultibase?: string;
 
-  private key: JsonWebKey2020 | X25519KeyAgreementKey;
+  private key: JsonWebKey2020 | X25519KeyAgreementKey2019;
 
   constructor(document: object) {
     this.id = document["id"];
@@ -55,7 +55,7 @@ export class Secret implements ISecret {
       case "X25519KeyAgreementKey2019":
         this.publicKeyBase58 = document["publicKeyBase58"];
         this.privateKeyBase58 = document["privateKeyBase58"];
-        this.key = new X25519KeyAgreementKey(
+        this.key = new X25519KeyAgreementKey2019(
           this.id,
           null,
           this.publicKeyBase58,
