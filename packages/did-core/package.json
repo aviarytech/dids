@@ -1,6 +1,6 @@
 {
   "name": "@aviarytech/did-core",
-  "version": "0.1.5",
+  "version": "0.1.8",
   "description": "Decentralized Identifiers (DIDs) core methods and interfaces",
   "author": "Brian Richter <brian@aviary.tech>",
   "homepage": "https://github.com/aviarytech/dids#readme",
