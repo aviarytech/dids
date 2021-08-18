@@ -1,3 +1,5 @@
+import { JsonWebKey } from "@aviarytech/crypto-core";
+
 /**
  * A secret.
  */
@@ -21,6 +23,8 @@ interface ISecret {
 
   /** The value of the private key in Multibase format. Only one value field will be present. */
   privateKeyMultibase?: string;
+
+  asJsonWebKey(): Promise<JsonWebKey>;
 }
 
 interface ISecretResolver {
