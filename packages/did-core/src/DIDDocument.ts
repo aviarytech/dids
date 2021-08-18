@@ -1,9 +1,47 @@
+import { IJWK, JsonWebKey, X25519KeyPair } from "@aviarytech/crypto-core";
 import assert = require("assert");
 import {
   IDIDDocument,
   IDIDDocumentServiceDescriptor,
   IDIDDocumentVerificationMethod,
 } from "./interfaces";
+
+export class DIDDocumentVerificationMethod
+  implements IDIDDocumentVerificationMethod
+{
+  id: string;
+  type: "JsonWebKey2020" | "X25519KeyAgreementKey2019";
+  controller: string;
+  publicKeyPem?: string;
+  publicKeyJwk?: IJWK;
+  publicKeyHex?: string;
+  publicKeyBase64?: string;
+  publicKeyBase58?: string;
+  publicKeyMultibase?: string;
+
+  constructor(document: any) {
+    Object.assign(this, document);
+  }
+
+  async asJsonWebKey(): Promise<JsonWebKey> {
+    switch (this.type) {
+      case "JsonWebKey2020":
+        return new JsonWebKey(
+          this.id,
+          this.controller,
+          this.publicKeyJwk,
+          null
+        );
+      case "X25519KeyAgreementKey2019":
+        return await new X25519KeyPair(
+          this.id,
+          this.controller,
+          this.publicKeyBase58,
+          null
+        ).export({ privateKey: false, type: "JsonWebKey2020" });
+    }
+  }
+}
 
 export class DIDDocument implements IDIDDocument {
   context: string[];
@@ -32,7 +70,8 @@ export class DIDDocument implements IDIDDocument {
       document["verificationMethod"].length > 0
     ) {
       this.verificationMethod = document["verificationMethod"].map(
-        (v: IDIDDocumentVerificationMethod) => v
+        (v: IDIDDocumentVerificationMethod) =>
+          new DIDDocumentVerificationMethod(v)
       );
     }
 

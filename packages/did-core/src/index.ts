@@ -2,15 +2,13 @@ export {
   IDIDDocument,
   IDIDDocumentServiceDescriptor,
   IDIDDocumentVerificationMethod,
-  IDIDResolver
+  IDIDResolver,
 } from "./interfaces";
 
-export {
-  DIDDocument
-} from "./DIDDocument"
+export { DIDDocument, DIDDocumentVerificationMethod } from "./DIDDocument";
 
 export {
   DIDResolver,
   DIDNotFoundError,
-  DIDMethodNotSupported
-} from "./DIDResolver"
+  DIDMethodNotSupported,
+} from "./DIDResolver";

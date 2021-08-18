@@ -1,5 +1,4 @@
-import { JWK } from "@aviarytech/crypto-core";
-
+import { IJWK, JsonWebKey } from "@aviarytech/crypto-core";
 /**
  * A verification method definition entry in a DID Document.
  */
@@ -17,7 +16,7 @@ interface IDIDDocumentVerificationMethod {
   publicKeyPem?: string;
 
   /** The value of the public key in JWK format. Only one value field will be present. */
-  publicKeyJwk?: any;
+  publicKeyJwk?: IJWK;
 
   /** The value of the public key in hex format. Only one value field will be present. */
   publicKeyHex?: string;
@@ -32,7 +31,7 @@ interface IDIDDocumentVerificationMethod {
   publicKeyMultibase?: string;
 
   /** Returns the public key in JWK format regardless of the current type */
-  asJwk(): JWK;
+  asJsonWebKey(): Promise<JsonWebKey>;
 }
 
 /**

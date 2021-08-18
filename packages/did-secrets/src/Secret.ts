@@ -1,8 +1,4 @@
-import {
-  JWK,
-  X25519KeyAgreementKey2019,
-  JsonWebKey2020,
-} from "@aviarytech/crypto-core";
+import { JsonWebKey, X25519KeyPair } from "@aviarytech/crypto-core";
 import { ISecret } from "./interfaces";
 
 export class SecretTypeAsJWKNotSupportedError extends Error {
@@ -35,7 +31,7 @@ export class Secret implements ISecret {
   privateKeyMultibase?: string;
   publicKeyMultibase?: string;
 
-  private key: JsonWebKey2020 | X25519KeyAgreementKey2019;
+  private key: JsonWebKey | X25519KeyPair;
 
   constructor(document: object) {
     this.id = document["id"];
@@ -45,7 +41,7 @@ export class Secret implements ISecret {
       case "JsonWebKey2020":
         this.publicKeyJwk = document["publicKeyJwk"];
         this.privateKeyJwk = document["privateKeyJwk"];
-        this.key = new JsonWebKey2020(
+        this.key = new JsonWebKey(
           this.id,
           null,
           this.publicKeyJwk,
@@ -55,7 +51,7 @@ export class Secret implements ISecret {
       case "X25519KeyAgreementKey2019":
         this.publicKeyBase58 = document["publicKeyBase58"];
         this.privateKeyBase58 = document["privateKeyBase58"];
-        this.key = new X25519KeyAgreementKey2019(
+        this.key = new X25519KeyPair(
           this.id,
           null,
           this.publicKeyBase58,
@@ -66,7 +62,15 @@ export class Secret implements ISecret {
     throw new SecretTypeNotFound(this.type);
   }
 
-  asJwk(): JWK {
-    return this.key.asJwk();
+  async asJsonWebKey(): Promise<JsonWebKey> {
+    switch (this.key.type) {
+      case "JsonWebKey2020":
+        return this.key;
+      case "X25519KeyAgreementKey2019":
+        return await this.key.export({
+          privateKey: true,
+          type: "JsonWebKey2020",
+        });
+    }
   }
 }
