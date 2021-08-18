@@ -1,6 +1,6 @@
 {
   "name": "@aviarytech/did-secrets",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Decentralized Identifiers (DIDs) secret resolver",
   "author": "Brian Richter <brian@aviary.tech>",
   "homepage": "https://github.com/aviarytech/dids#readme",
