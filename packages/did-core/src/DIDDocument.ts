@@ -44,6 +44,7 @@ export class DIDDocumentVerificationMethod
 }
 
 export class DIDDocument implements IDIDDocument {
+  document: object;
   context: string[];
   id: string;
   controller?: string;
@@ -59,6 +60,8 @@ export class DIDDocument implements IDIDDocument {
   constructor(document: object) {
     assert(document["@context"]);
     assert(document["id"]);
+
+    this.document = document;
 
     this.context = document["@context"];
     this.id = document["id"];

@@ -55,6 +55,9 @@ interface IDIDDocumentServiceDescriptor {
  * Decentralized Identity Document.
  */
 interface IDIDDocument {
+  /** The JSON Document (self) */
+  document: object;
+
   /** The JSON-LD context of the DID Documents. */
   context: string[];
 
