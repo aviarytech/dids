@@ -1,4 +1,5 @@
-import { IJWK, JsonWebKey } from "@aviarytech/crypto-core";
+import { IJWK, JsonWebKey } from "./crypto-interfaces";
+
 /**
  * A verification method definition entry in a DID Document.
  */

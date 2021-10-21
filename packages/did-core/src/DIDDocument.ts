@@ -1,5 +1,5 @@
-import { IJWK, JsonWebKey, X25519KeyPair } from "@aviarytech/crypto-core";
 import assert = require("assert");
+import { IJWK, JsonWebKey, X25519KeyPair } from "./crypto-interfaces";
 import {
   IDIDDocument,
   IDIDDocumentServiceDescriptor,
@@ -31,7 +31,7 @@ export class DIDDocumentVerificationMethod
           this.controller,
           this.publicKeyJwk,
           null
-        );
+        ) as JsonWebKey;
       case "X25519KeyAgreementKey2019":
         return await new X25519KeyPair(
           this.id,

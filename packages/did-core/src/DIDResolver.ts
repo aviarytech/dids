@@ -1,7 +1,7 @@
 import { documentLoaderFactory } from "@transmute/jsonld-document-loader";
 import { DocumentLoader } from "@transmute/jsonld-document-loader/dist/types";
 import axios from "axios";
-import { IDIDDocument } from "./interfaces";
+
 import { DIDDocument } from "./DIDDocument";
 import assert = require("assert");
 
