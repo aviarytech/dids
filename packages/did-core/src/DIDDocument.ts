@@ -57,10 +57,10 @@ export class DIDDocument implements IDIDDocument {
   capabilityDelegation?: IDIDDocumentVerificationMethod[];
 
   constructor(document: object) {
-    if (typeof document["@context"]) {
+    if (typeof document["@context"] === "undefined") {
       throw new Error("@context is required");
     }
-    if (typeof document["id"]) {
+    if (typeof document["id"] === "undefined") {
       throw new Error("id is required");
     }
 
