@@ -3,7 +3,6 @@ import { DocumentLoader } from "@transmute/jsonld-document-loader/dist/types";
 import axios from "axios";
 
 import { DIDDocument } from "./DIDDocument";
-import assert = require("assert");
 
 export class DIDNotFoundError extends Error {
   constructor(did: string) {
@@ -50,7 +49,9 @@ export class DIDResolver {
   }
 
   async resolve(did: string): Promise<DIDDocument> {
-    assert(did.split(":").length >= 3)
+    if (did.split(":").length < 3) {
+      throw new Error(`${did} not a valid DID`)
+    }
     try {
       const { document } = await this.documentLoader(did);
       if (!document) throw new DIDNotFoundError(did);

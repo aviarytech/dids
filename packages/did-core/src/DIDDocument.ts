@@ -1,4 +1,3 @@
-import assert = require("assert");
 import { IJWK, JsonWebKey, X25519KeyPair } from "./crypto-interfaces";
 import {
   IDIDDocument,
@@ -58,8 +57,12 @@ export class DIDDocument implements IDIDDocument {
   capabilityDelegation?: IDIDDocumentVerificationMethod[];
 
   constructor(document: object) {
-    assert(document["@context"]);
-    assert(document["id"]);
+    if (typeof document["@context"]) {
+      throw new Error("@context is required");
+    }
+    if (typeof document["id"]) {
+      throw new Error("id is required");
+    }
 
     this.document = document;
 
@@ -127,7 +130,9 @@ export class DIDDocument implements IDIDDocument {
     return methods.map((m: string | IDIDDocumentVerificationMethod) => {
       if (typeof m === "string") {
         const v = this.getVerificationMethodById(m);
-        assert(v);
+        if (!v) {
+          throw new Error(`Verification method: ${m} not found`);
+        }
         return v;
       } else {
         return m as IDIDDocumentVerificationMethod;
