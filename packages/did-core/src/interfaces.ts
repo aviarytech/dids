@@ -33,6 +33,8 @@ interface IDIDDocumentVerificationMethod {
 
   /** Returns the public key in JWK format regardless of the current type */
   asJsonWebKey(): Promise<JsonWebKey>;
+
+  toJSON(): object;
 }
 
 /**
@@ -104,7 +106,7 @@ interface IDIDDocument {
   getCapabilityInvocationById: (id: string) => IDIDDocumentVerificationMethod;
   getCapabilityDelegationById: (id: string) => IDIDDocumentVerificationMethod;
   getAssertionMethodById: (id: string) => IDIDDocumentVerificationMethod;
-  toJson: () => object;
+  toJSON: () => object;
 }
 
 interface IDIDResolver {

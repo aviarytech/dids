@@ -40,6 +40,25 @@ export class DIDDocumentVerificationMethod
         ).export({ privateKey: false, type: "JsonWebKey2020" });
     }
   }
+
+  toJSON(): object {
+    switch (this.type) {
+      case "JsonWebKey2020":
+        return {
+          id: this.id,
+          type: this.type,
+          controller: this.controller,
+          publicKeyJwk: this.publicKeyJwk,
+        };
+      case "X25519KeyAgreementKey2019":
+        return {
+          id: this.id,
+          type: this.type,
+          controller: this.controller,
+          publicKeyBase58: this.publicKeyBase58,
+        };
+    }
+  }
 }
 
 export class DIDDocument implements IDIDDocument {
@@ -176,7 +195,7 @@ export class DIDDocument implements IDIDDocument {
     return this.assertionMethod.find((k) => k.id === id);
   }
 
-  toJson(): object {
+  toJSON(): object {
     let doc: any = { "@context": this["@context"], id: this.id };
     if (this.controller) {
       doc.controller = this.controller;
@@ -185,7 +204,7 @@ export class DIDDocument implements IDIDDocument {
       doc.alsoKnownAs = this.alsoKnownAs;
     }
     if (this.verificationMethod && this.verificationMethod.length > 0) {
-      doc.verificationMethod = this.verificationMethod;
+      doc.verificationMethod = this.verificationMethod.map((x) => x.toJSON());
     }
     if (this.service && this.service.length > 0) {
       doc.service = this.service;
