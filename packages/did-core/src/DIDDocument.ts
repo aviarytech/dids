@@ -184,37 +184,37 @@ export class DIDDocument implements IDIDDocument {
     if (this.alsoKnownAs) {
       doc.alsoKnownAs = this.alsoKnownAs;
     }
-    if (this.verificationMethod.length > 0) {
+    if (this.verificationMethod && this.verificationMethod.length > 0) {
       doc.verificationMethod = this.verificationMethod;
     }
-    if (this.service.length > 0) {
+    if (this.service && this.service.length > 0) {
       doc.service = this.service;
     }
-    if (this.authentication.length > 0) {
+    if (this.authentication && this.authentication.length > 0) {
       doc.authentication =
         typeof this.authentication[0] === "string"
           ? this.authentication
           : this.authentication.map((x) => x.id);
     }
-    if (this.assertionMethod.length > 0) {
+    if (this.assertionMethod && this.assertionMethod.length > 0) {
       doc.assertionMethod =
         typeof this.assertionMethod[0] === "string"
           ? this.assertionMethod
           : this.assertionMethod.map((x) => x.id);
     }
-    if (this.keyAgreement.length > 0) {
+    if (this.keyAgreement && this.keyAgreement.length > 0) {
       doc.keyAgreement =
         typeof this.keyAgreement[0] === "string"
           ? this.keyAgreement
           : this.keyAgreement.map((x) => x.id);
     }
-    if (this.capabilityInvocation.length > 0) {
+    if (this.capabilityInvocation && this.capabilityInvocation.length > 0) {
       doc.capabilityInvocation =
         typeof this.capabilityInvocation[0] === "string"
           ? this.capabilityInvocation
           : this.capabilityInvocation.map((x) => x.id);
     }
-    if (this.capabilityDelegation.length > 0) {
+    if (this.capabilityDelegation && this.capabilityDelegation.length > 0) {
       doc.capabilityDelegation =
         typeof this.capabilityDelegation[0] === "string"
           ? this.capabilityDelegation
