@@ -44,7 +44,7 @@ export class DIDDocumentVerificationMethod
 
 export class DIDDocument implements IDIDDocument {
   document: object;
-  context: string[];
+  "@context": string[];
   id: string;
   controller?: string;
   alsoKnownAs?: string;
@@ -66,7 +66,7 @@ export class DIDDocument implements IDIDDocument {
 
     this.document = document;
 
-    this.context = document["@context"];
+    this["@context"] = document["@context"];
     this.id = document["id"];
     this.controller = document["controller"] ?? null;
     this.alsoKnownAs = document["alsoKnownAs"] ?? null;
@@ -174,5 +174,52 @@ export class DIDDocument implements IDIDDocument {
 
   getAssertionMethodById(id: string): IDIDDocumentVerificationMethod {
     return this.assertionMethod.find((k) => k.id === id);
+  }
+
+  toJson(): object {
+    let doc: any = { "@context": this["@context"], id: this.id };
+    if (this.controller) {
+      doc.controller = this.controller;
+    }
+    if (this.alsoKnownAs) {
+      doc.alsoKnownAs = this.alsoKnownAs;
+    }
+    if (this.verificationMethod.length > 0) {
+      doc.verificationMethod = this.verificationMethod;
+    }
+    if (this.service.length > 0) {
+      doc.service = this.service;
+    }
+    if (this.authentication.length > 0) {
+      doc.authentication =
+        typeof this.authentication[0] === "string"
+          ? this.authentication
+          : this.authentication.map((x) => x.id);
+    }
+    if (this.assertionMethod.length > 0) {
+      doc.assertionMethod =
+        typeof this.assertionMethod[0] === "string"
+          ? this.assertionMethod
+          : this.assertionMethod.map((x) => x.id);
+    }
+    if (this.keyAgreement.length > 0) {
+      doc.keyAgreement =
+        typeof this.keyAgreement[0] === "string"
+          ? this.keyAgreement
+          : this.keyAgreement.map((x) => x.id);
+    }
+    if (this.capabilityInvocation.length > 0) {
+      doc.capabilityInvocation =
+        typeof this.capabilityInvocation[0] === "string"
+          ? this.capabilityInvocation
+          : this.capabilityInvocation.map((x) => x.id);
+    }
+    if (this.capabilityDelegation.length > 0) {
+      doc.capabilityDelegation =
+        typeof this.capabilityDelegation[0] === "string"
+          ? this.capabilityDelegation
+          : this.capabilityDelegation.map((x) => x.id);
+    }
+    return doc;
   }
 }

@@ -60,7 +60,7 @@ interface IDIDDocument {
   document: object;
 
   /** The JSON-LD context of the DID Documents. */
-  context: string[];
+  "@context": string[] | string;
 
   /** The DID to which this DID Document pertains. */
   id: string;
@@ -75,22 +75,22 @@ interface IDIDDocument {
   verificationMethod?: IDIDDocumentVerificationMethod[];
 
   /** Array of services associated with the DID. */
-  service?: IDIDDocumentServiceDescriptor[];
+  service?: IDIDDocumentServiceDescriptor[] | string[];
 
   /** Array of authentication methods. */
-  authentication?: IDIDDocumentVerificationMethod[];
+  authentication?: IDIDDocumentVerificationMethod[] | string[];
 
   /** Array of assertion methods. */
-  assertionMethod?: IDIDDocumentVerificationMethod[];
+  assertionMethod?: IDIDDocumentVerificationMethod[] | string[];
 
   /** Array of key agreement methods */
-  keyAgreement?: IDIDDocumentVerificationMethod[];
+  keyAgreement?: IDIDDocumentVerificationMethod[] | string[];
 
   /** Array of capability invocation methods */
-  capabilityInvocation?: IDIDDocumentVerificationMethod[];
+  capabilityInvocation?: IDIDDocumentVerificationMethod[] | string[];
 
   /** Array of capability delegation methods */
-  capabilityDelegation?: IDIDDocumentVerificationMethod[];
+  capabilityDelegation?: IDIDDocumentVerificationMethod[] | string[];
 
   normalizeVerificationMethod: (
     methods: (string | IDIDDocumentVerificationMethod)[]
@@ -104,6 +104,7 @@ interface IDIDDocument {
   getCapabilityInvocationById: (id: string) => IDIDDocumentVerificationMethod;
   getCapabilityDelegationById: (id: string) => IDIDDocumentVerificationMethod;
   getAssertionMethodById: (id: string) => IDIDDocumentVerificationMethod;
+  toJson: () => object;
 }
 
 interface IDIDResolver {
