@@ -70,3 +70,11 @@ test("env var secret resolver can resolve a X25519KeyAgreementKey2019 JSON file"
     "S8fJ_kWYHtou5yMYqEUQgeJgBz5el-BdH_msKrkwXQY"
   );
 });
+test("env var secret resolver throws error when doesn't have SECRETS key", async () => {
+  try {
+    const resolver = new EnvironmentVariableSecretResolver({});
+    expect(true).toBeFalsy()
+  } catch (e: any) {
+    expect(e.message).toContain('No (base64 encoded) SECRETS found in environment')
+  }
+});

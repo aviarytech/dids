@@ -17,12 +17,13 @@ export class EnvironmentVariableSecretResolver {
   private secrets: Secret[];
 
   constructor(env: any) {
+    if (!env.SECRETS) throw new Error('No (base64 encoded) SECRETS found in environment')
     this.secrets = JSON.parse(utf8.decode(base64url.decode(env.SECRETS)))
   }
 
   async resolve(id: string): Promise<Secret> {
     const secret = this.secrets.find(s => s.id === id)
-    if (!secret) throw new Error('No (base64 encoded secrets) found in environment')
+    if (!secret) throw new Error('No (base64 encoded) SECRETS found in environment')
     return new Secret(secret);
   }
 }

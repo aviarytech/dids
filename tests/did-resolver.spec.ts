@@ -39,7 +39,6 @@ describe('did-resolver', () => {
       const did = await resolver.resolve("did:fake:example.com");
       expect(true).toBeFalsy()
     } catch (e) {
-      console.log(e)
       expect(e instanceof DIDMethodNotSupported).toBeTruthy();
     }
   });
