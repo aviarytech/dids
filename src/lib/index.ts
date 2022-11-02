@@ -1,0 +1,5 @@
+export * from "$lib/DIDDocument.js"
+export * from "$lib/DIDResolver.js"
+export * from "$lib/Secret.js"
+export * from "$lib/SecretResolver.js"
+export * from "$lib/interfaces.js"
