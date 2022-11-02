@@ -2,7 +2,7 @@ import { documentLoaderFactory, type Iri } from "@transmute/jsonld-document-load
 import type { DocumentLoader } from "@transmute/jsonld-document-loader";
 import axios from "axios";
 
-import { DIDDocument } from "./DIDDocument";
+import { DIDDocument } from "./DIDDocument.js";
 
 export class DIDNotFoundError extends Error {
   constructor(did: string) {
