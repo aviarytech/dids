@@ -1,4 +1,5 @@
-import  { type JsonWebKey2020, JsonWebKeyPair, X25519KeyAgreementKey2019 } from "@aviarytech/crypto";
+import  { type JsonWebKey2020, JsonWebKeyPair, X25519KeyAgreementKey2019, X25519KeyAgreementKey2020,
+  Ed25519VerificationKey2018, Ed25519VerificationKey2020 } from "@aviarytech/crypto";
 import type { ISecret } from "./interfaces.js";
 
 export class SecretTypeAsJWKNotSupportedError extends Error {
@@ -31,7 +32,7 @@ export class Secret implements ISecret {
   privateKeyMultibase?: string;
   publicKeyMultibase?: string;
 
-  private key: JsonWebKeyPair | X25519KeyAgreementKey2019;
+  private key: JsonWebKeyPair | X25519KeyAgreementKey2019 | X25519KeyAgreementKey2020 | Ed25519VerificationKey2018 | Ed25519VerificationKey2020;
 
   constructor(document: any) {
     this.id = document.id;
@@ -58,6 +59,36 @@ export class Secret implements ISecret {
           this.privateKeyBase58
         );
         return this;
+      case "X25519KeyAgreementKey2020":
+        this.publicKeyMultibase = document.publicKeyMultibase;
+        this.privateKeyMultibase = document.privateKeyMultibase;
+        this.key = new X25519KeyAgreementKey2020(
+          this.id,
+          this.id,
+          this.publicKeyMultibase as string,
+          this.privateKeyMultibase
+        );
+        return this;
+      case "Ed25519VerificationKey2018":
+        this.publicKeyBase58 = document.publicKeyBase58;
+        this.privateKeyBase58 = document.privateKeyBase58;
+        this.key = new Ed25519VerificationKey2018(
+          this.id,
+          this.id,
+          this.publicKeyBase58 as string,
+          this.privateKeyBase58
+        );
+        return this;
+      case "Ed25519VerificationKey2020":
+        this.publicKeyMultibase = document.publicKeyMultibase;
+        this.privateKeyMultibase = document.privateKeyMultibase;
+        this.key = new Ed25519VerificationKey2020(
+          this.id,
+          this.id,
+          this.publicKeyMultibase as string,
+          this.privateKeyMultibase
+        );
+        return this;
     }
     throw new SecretTypeNotFound(this.type);
   }
@@ -67,6 +98,9 @@ export class Secret implements ISecret {
       case "JsonWebKey2020":
         return this.key;
       case "X25519KeyAgreementKey2019":
+      case "X25519KeyAgreementKey2020":
+      case "Ed25519VerificationKey2018":
+      case "Ed25519VerificationKey2020":
         return await this.key.export({
           privateKey: true,
           type: "JsonWebKey2020",
