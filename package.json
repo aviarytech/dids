@@ -1,6 +1,6 @@
 {
 	"name": "@aviarytech/dids",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "svelte-kit sync && svelte-package",
@@ -33,7 +33,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@aviarytech/crypto": "^0.0.35",
+		"@aviarytech/crypto": "^0.0.40",
 		"@transmute/jsonld-document-loader": "^0.7.0-unstable.70",
 		"axios": "^1.1.3"
 	}

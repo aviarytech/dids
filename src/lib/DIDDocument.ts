@@ -1,4 +1,5 @@
-import { type IJWK, type JsonWebKey2020, JsonWebKeyPair, X25519KeyAgreementKey2019 } from "@aviarytech/crypto";
+import { type IJWK, type JsonWebKey2020, JsonWebKeyPair, X25519KeyAgreementKey2019,
+  X25519KeyAgreementKey2020, Ed25519VerificationKey2018, Ed25519VerificationKey2020 } from "@aviarytech/crypto";
 import type  {
   IDIDDocument,
   IDIDDocumentServiceDescriptor,
@@ -9,7 +10,7 @@ export class DIDDocumentVerificationMethod
   implements IDIDDocumentVerificationMethod
 {
   id: string;
-  type: "JsonWebKey2020" | "X25519KeyAgreementKey2019";
+  type: "JsonWebKey2020" | "X25519KeyAgreementKey2019" | "X25519KeyAgreementKey2020" | "Ed25519VerificationKey2018" | "Ed25519VerificationKey2020";
   controller: string;
   publicKeyPem?: string;
   publicKeyJwk?: IJWK;
@@ -43,6 +44,35 @@ export class DIDDocumentVerificationMethod
           this.controller,
           this.publicKeyBase58
         ).export({ privateKey: false, type: "JsonWebKey2020" });
+      case "X25519KeyAgreementKey2020":
+        if (!this.publicKeyMultibase) {
+          throw new Error('publicKeyMultibase not found')
+        }
+        return await new X25519KeyAgreementKey2020(
+          this.id,
+          this.controller,
+          this.publicKeyMultibase
+        ).export({ privateKey: false, type: "JsonWebKey2020" });
+      case "Ed25519VerificationKey2018":
+        if (!this.publicKeyBase58) {
+          throw new Error('publicKeyBase58 not found')
+        }
+        return await new Ed25519VerificationKey2018(
+          this.id,
+          this.controller,
+          this.publicKeyBase58
+        ).export({ privateKey: false, type: "JsonWebKey2020" });
+      case "Ed25519VerificationKey2020":
+        if (!this.publicKeyMultibase) {
+          throw new Error('publicKeyMultibase not found')
+        }
+        return await new Ed25519VerificationKey2020(
+          this.id,
+          this.controller,
+          this.publicKeyMultibase
+        ).export({ privateKey: false, type: "JsonWebKey2020" });
+      default:
+        throw new Error(`verificationMethod type ${this.type} can't be exported as JsonWebKey2020`)
     }
   }
 
@@ -62,6 +92,15 @@ export class DIDDocumentVerificationMethod
           controller: this.controller,
           publicKeyBase58: this.publicKeyBase58,
         };
+      case "X25519KeyAgreementKey2020":
+        return {
+          id: this.id,
+          type: this.type,
+          controller: this.controller,
+          publicKeyMultibase: this.publicKeyMultibase,
+        };
+      default:
+        return this
     }
   }
 }
