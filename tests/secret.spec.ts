@@ -17,3 +17,16 @@ test("secret can be constructed from json", async () => {
   );
   expect(secret.privateKeyJwk.kty).toBe("OKP");
 });
+
+test("secret can be X25519KeyAgreementKey2020", async () => {
+  const json = require("./fixtures/X25519KeyAgreementKey2020.example.json");
+
+  const secret = new Secret(json);
+
+  expect(secret.id).toBe("did:web:example.com#key-1");
+  expect(secret.type).toBe("X25519KeyAgreementKey2020");
+  expect(secret.privateKeyMultibase).toBe(
+    "z66pGmEHd7fBfQa9ap27vWSouHAmipbmmw6GduBwNRY6y"
+  );
+  expect(secret.publicKeyMultibase).toBe("z3zSE11h82KtPYPj8p9cTgzr6yDWFYEsfM19xc1K5vjKY")
+});
