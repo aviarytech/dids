@@ -2,7 +2,7 @@ import { DIDDocument } from "$lib";
 import { test, expect } from "vitest";
 
 test("did document can initialize from json", async () => {
-  const json = require("./fixtures/didDocument.json");
+  const json = require("./fixtures/dids/web.json");
 
   const didDoc = new DIDDocument(json);
 
@@ -19,7 +19,7 @@ test("did document can initialize from json", async () => {
 });
 
 test("did document can get all key agreement keys", async () => {
-  const json = require("./fixtures/didDocument.json");
+  const json = require("./fixtures/dids/web.json");
   const didDoc = new DIDDocument(json);
 
   const kaks = didDoc.getAllKeyAgreements();

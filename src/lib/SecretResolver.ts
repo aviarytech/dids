@@ -23,7 +23,7 @@ export class EnvironmentVariableSecretResolver {
 
   async resolve(id: string): Promise<Secret> {
     const secret = this.secrets.find(s => s.id === id)
-    if (!secret) throw new Error('No (base64 encoded) SECRETS found in environment')
+    if (!secret) throw new Error(`Secret ${id} not found in SECRETS from environment`)
     return new Secret(secret);
   }
 }

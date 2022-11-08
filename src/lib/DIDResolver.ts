@@ -1,5 +1,6 @@
 import { documentLoaderFactory, type Iri } from "@transmute/jsonld-document-loader";
 import type { DocumentLoader } from "@transmute/jsonld-document-loader";
+import { resolve as didPeer } from "@aviarytech/did-peer"
 import axios from "axios";
 
 import { DIDDocument } from "./DIDDocument.js";
@@ -31,16 +32,22 @@ export class DIDResolver {
         ["did:web"]: async (did: string) => {
           const [_, method, id, ...extras] = did.split(":");
           let domain = id.split("#").length > 1 ? id.split("#")[0] : id;
-          if (id.indexOf("localhost") >= 0) {
-            domain += `:${extras}`;
-          }
+          let path = extras.join('/')
+          const [host, port] = domain.split('%3A');
           const resp = await axios.get(
             `http${
-              id.indexOf("localhost") >= 0 ? null : "s"
-            }://${domain}/.well-known/did.json`
+              host.indexOf("localhost") >= 0 ? null : "s"
+            }://${host}${!port ? '' : `:${port}`}/${path === '' ? '.well-known' : path}/did.json`
           );
           return resp.data;
         },
+        ["did:peer"]: async (did: string) => {
+          try {
+            return await didPeer(did)
+          } catch (e: any) {
+            console.error(`could not resolve did:peer`, e.message)
+          }
+        }
       })
   }
 
