@@ -32,6 +32,7 @@ describe('did-resolver', () => {
       expect(e instanceof DIDMethodNotSupported).toBeTruthy();
     }
   });
+  
 })
 
 describe('did:web', () => {
@@ -72,6 +73,17 @@ describe('did:web', () => {
   
     expect(mock.history.get.length).toBe(1);
     expect(mock.history.get[0].url).toBe("https://example.com:3000/user/123/did.json");
+    expect(did.context).toContain("https://www.w3.org/ns/did/v1");
+  });
+  test("did resolver can resolve a web did w/ http on localhost", async () => {
+    const didDoc = require("./fixtures/dids/web.json");
+    mock.onGet().reply(200, JSON.stringify(didDoc), { headers: { 'Content-Type': 'application/json'}})
+  
+    const resolver = new DIDResolver();
+    const did = await resolver.resolve("did:web:localhost%3A3000:user:123");
+  
+    expect(mock.history.get.length).toBe(1);
+    expect(mock.history.get[0].url).toBe("http://localhost:3000/user/123/did.json");
     expect(did.context).toContain("https://www.w3.org/ns/did/v1");
   });
 })

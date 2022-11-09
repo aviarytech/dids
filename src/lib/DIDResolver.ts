@@ -36,7 +36,7 @@ export class DIDResolver {
           const [host, port] = domain.split('%3A');
           const resp = await axios.get(
             `http${
-              host.indexOf("localhost") >= 0 ? null : "s"
+              host.indexOf("localhost") >= 0 ? '' : "s"
             }://${host}${!port ? '' : `:${port}`}/${path === '' ? '.well-known' : path}/did.json`
           );
           return resp.data;
