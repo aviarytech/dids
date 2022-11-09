@@ -80,10 +80,10 @@ describe('did:web', () => {
     mock.onGet().reply(200, JSON.stringify(didDoc), { headers: { 'Content-Type': 'application/json'}})
   
     const resolver = new DIDResolver();
-    const did = await resolver.resolve("did:web:localhost%3A3000:user:123");
+    const did = await resolver.resolve("did:web:localhost%3A5102");
   
     expect(mock.history.get.length).toBe(1);
-    expect(mock.history.get[0].url).toBe("http://localhost:3000/user/123/did.json");
+    expect(mock.history.get[0].url).toBe("http://localhost:5102/.well-known/did.json");
     expect(did.context).toContain("https://www.w3.org/ns/did/v1");
   });
 })
