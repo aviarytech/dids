@@ -1,5 +1,6 @@
 import { Secret } from "$lib/Secret.js";
 import { base64url, utf8 } from "@aviarytech/crypto";
+import type { Readable } from "svelte/store";
 
 export class JSONSecretResolver {
   private secret: Secret;
@@ -25,5 +26,27 @@ export class EnvironmentVariableSecretResolver {
     const secret = this.secrets.find(s => s.id === id)
     if (!secret) throw new Error(`Secret ${id} not found in SECRETS from environment`)
     return new Secret(secret);
+  }
+}
+
+export class WalletSecretResolver {
+  private secrets: Secret[] = [];
+
+  constructor(store: Readable<any>) {
+    var self = this;
+    store.subscribe(r => {
+      self.secrets = r
+    })
+  }
+
+  async resolve(id: string): Promise<Secret> {
+    try {
+      const secret = this.secrets.find((s: any) => s.id === id)
+      if (!secret) throw new Error(`Secret ${id} not found in store secrets`)
+      return new Secret(secret);
+    } catch (e: any) {
+      console.error(e)
+      throw new Error(e.message)
+    }
   }
 }
