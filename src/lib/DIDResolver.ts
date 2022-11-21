@@ -51,12 +51,12 @@ export class DIDResolver {
       })
   }
 
-  async resolve(did: Iri): Promise<DIDDocument> {
+  async resolve(did: string): Promise<DIDDocument> {
     if (did.split(":").length < 3) {
       throw new Error(`${did} not a valid DID`)
     }
     try {
-      const { document } = await this.documentLoader(did);
+      const { document } = await this.documentLoader(did as Iri);
       if (!document) throw new DIDNotFoundError(did);
       if (typeof document === 'object') {
         return new DIDDocument(document)
