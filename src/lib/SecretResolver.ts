@@ -3,14 +3,16 @@ import { base64url, utf8 } from "@aviarytech/crypto";
 import type { Readable } from "svelte/store";
 
 export class JSONSecretResolver {
-  private secret: Secret;
+  private secrets: Secret[];
 
   constructor(json: object) {
-    this.secret = new Secret(json);
+    this.secrets = Array.isArray(json) ? json.map(j => new Secret(j)) : [new Secret(json)];
   }
 
   async resolve(id: string): Promise<Secret> {
-    return this.secret;
+    const secret = this.secrets.find(s => s.id === id)
+    if (!secret) throw new Error(`Secret ${id} not found in provided secrets json`)
+    return new Secret(secret);
   }
 }
 
