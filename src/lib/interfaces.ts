@@ -80,8 +80,8 @@ export interface IDIDDocumentServiceDescriptor {
   /** The type of this service. */
   type: string;
 
-  /** The endpoint of this service, as a URI. */
-  serviceEndpoint: string;
+  /** The endpoint of this service. */
+  serviceEndpoint: string | any;
 
   /** didcomm service extension */
   routingKeys: string[];
